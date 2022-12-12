@@ -4,6 +4,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
@@ -12,12 +13,14 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
  * enumerability of all the token ids in the contract as well as all token ids owned by each
  * account.
  */
-abstract contract ERC721EnumerableV2 is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeable {
-    function __ERC721EnumerableExtended_init() internal onlyInitializing {
+abstract contract ERC721EnumerableV2 is Initializable, ERC721EnumerableUpgradeable {
+    using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
+
+    function __ERC721EnumerableV2_init() internal onlyInitializing {
         __ERC721Enumerable_init();
     }
 
-    function __ERC721EnumerableExtended_init_unchained() internal onlyInitializing {
+    function __ERC721EnumerableV2_init_unchained() internal onlyInitializing {
     }
 
     function batchTransferFrom(address from, address to, uint256[] memory tokenIds) public virtual {
@@ -27,7 +30,7 @@ abstract contract ERC721EnumerableV2 is Initializable, ERC721Upgradeable, ERC721
     }
 
     function tokensOfOwner(address owner) public view virtual returns(uint256[] memory) {
-        uint256 total = ERC721Upgradeable.balanceOf(owner);
+        uint256 total = balanceOf(owner);
         uint256[] memory tokens = new uint256[](total);
         for (uint256 i = 0; i < total; i++) {
             tokens[i] = tokenOfOwnerByIndex(owner, i);
@@ -57,7 +60,7 @@ abstract contract ERC721EnumerableV2 is Initializable, ERC721Upgradeable, ERC721
     public
     view
     virtual
-    override(ERC721Upgradeable, ERC721EnumerableUpgradeable)
+    override(ERC721EnumerableUpgradeable)
     returns (bool)
     {
         return super.supportsInterface(interfaceId);
@@ -68,7 +71,7 @@ abstract contract ERC721EnumerableV2 is Initializable, ERC721Upgradeable, ERC721
         address to,
         uint256 firstTokenId,
         uint256 batchSize
-    ) internal virtual override(ERC721Upgradeable, ERC721EnumerableUpgradeable) {
+    ) internal virtual override(ERC721EnumerableUpgradeable) {
         super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
     }
 

@@ -17,11 +17,11 @@ abstract contract ERC721BurnableV2 is Initializable, ERC721BurnableUpgradeable {
 
     EnumerableSetUpgradeable.UintSet private _burned;
 
-    function __ERC721BurnableExtended_init() internal onlyInitializing {
+    function __ERC721BurnableV2_init() internal onlyInitializing {
         __ERC721Burnable_init();
     }
 
-    function __ERC721BurnableExtended_init_unchained() internal onlyInitializing {
+    function __ERC721BurnableV2_init_unchained() internal onlyInitializing {
     }
 
     function burn(uint256 tokenId) public virtual override {
