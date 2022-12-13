@@ -18,7 +18,9 @@ abstract contract ERC721URITokenJSON is Initializable, ERC721Upgradeable {
 
     string public imageBaseURI;
 
-    function __ERC721URITokenJSON_init() internal onlyInitializing {}
+    function __ERC721URITokenJSON_init(string memory _imageBaseURI) internal onlyInitializing {
+        imageBaseURI = _imageBaseURI;
+    }
 
     function tokenURI(uint256 tokenId) public view virtual override(ERC721Upgradeable) returns(string memory) {
         return tokenURIJSON(tokenId).toBase64();

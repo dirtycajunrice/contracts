@@ -1,6 +1,6 @@
 {
   "name": "@dirtycajunrice/contracts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Secure & Improved Smart Contract library for Solidity",
   "author": "DirtyCajunRice",
   "license": "MIT",
