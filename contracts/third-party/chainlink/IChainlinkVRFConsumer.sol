@@ -11,6 +11,5 @@ interface IChainlinkVRFConsumer {
         uint256[] words;
     }
 
-    function fulfillRandomWords(uint256 id, uint256[] memory words) external;
     function requestOf(address requester) external view returns (Request memory);
 }
