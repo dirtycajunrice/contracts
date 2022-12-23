@@ -18,4 +18,4 @@ cp -r contracts/* dist/
 
 cd dist/
 
-#npm publish --access public
+npm publish --access public
