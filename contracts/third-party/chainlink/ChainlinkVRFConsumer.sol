@@ -73,6 +73,18 @@ abstract contract ChainlinkVRFConsumer is Initializable, IChainlinkVRFConsumer, 
         delete _requests[requester];
     }
 
+    function _totalPendingRequesters() internal view returns (uint256) {
+        return _requesters.length();
+    }
+
+    function _allRequests() internal view returns (Request[] memory requests) {
+        address[] memory requesters = _requesters.values();
+        requests = new Request[](requesters.length);
+        for (uint256 i = 0; i < requesters.length; i++) {
+            requests[i] = _requests[requesters[i]];
+        }
+    }
+
     function supportsInterface(
         bytes4 interfaceId
     ) public view virtual override(ChainlinkVRFConsumerBase) returns (bool) {
