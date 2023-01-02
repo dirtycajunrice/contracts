@@ -1,6 +1,6 @@
 import "@nomicfoundation/hardhat-toolbox";
 import '@openzeppelin/hardhat-upgrades';
-
+import "@dirtycajunrice/hardhat-tasks";
 import "dotenv/config";
 
 import "./tasks";
